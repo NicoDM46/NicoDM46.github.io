@@ -75,14 +75,48 @@ function actualizarTiempo() {
     }
 }
 
-// Finalizar el juego y mostrar ranking
+// Guardar puntaje en Firebase
+function guardarRanking(nombreJugador, puntaje) {
+    const nuevoJugador = {
+        nombre: nombreJugador,
+        puntaje: puntaje
+    };
+    // Agregar a Firebase
+    const nuevoJugadorKey = database.ref().child('ranking').push().key;
+    database.ref('ranking/' + nuevoJugadorKey).set(nuevoJugador);
+}
+
+// Cargar el ranking desde Firebase y mostrarlo
+function cargarRanking() {
+    database.ref('ranking').orderByChild('puntaje').limitToLast(10).on('value', function(snapshot) {
+        rankingElemento.innerHTML = '';
+        const jugadores = [];
+        snapshot.forEach(function(childSnapshot) {
+            const jugador = childSnapshot.val();
+            jugadores.push(jugador);
+        });
+        // Mostrar en orden descendente
+        jugadores.reverse();
+        jugadores.forEach(jugador => {
+            const li = document.createElement('li');
+            li.textContent = `${jugador.nombre} - ${jugador.puntaje} puntos`;
+            rankingElemento.appendChild(li);
+        });
+    });
+}
+
+// Finalizar el juego y registrar al jugador
 function finalizarJuego() {
     clearInterval(intervalo);
     const nombreJugador = prompt("Juego terminado. Ingresa tu nombre:");
-    ranking.push({ nombre: nombreJugador, puntaje });
-    mostrarRanking();
+    guardarRanking(nombreJugador, puntaje);
+    cargarRanking(); // Actualizar el ranking una vez se registre el nuevo puntaje
     startBtn.style.display = 'block';  // Mostrar botón de inicio
 }
+
+// Cargar el ranking al inicio
+window.onload = cargarRanking;
+
 
 // Mostrar el ranking en la lista
 function mostrarRanking() {
