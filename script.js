@@ -1,4 +1,20 @@
-// Preguntas y respuestas (puedes añadir más)
+import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-database.js";
+
+let puntaje = 0;
+let tiempoRestante = 60;
+let preguntaActual = 0;
+let intervalo;
+let ranking = [];
+let nombreJugador = ''; // Guardar el nombre del jugador aquí
+
+const preguntaElemento = document.getElementById("question");
+const opcionesElemento = document.getElementById("options");
+const puntajeElemento = document.getElementById("score");
+const timerElemento = document.getElementById("timer");
+const rankingElemento = document.getElementById("ranking-list");
+const startBtn = document.getElementById("start-btn");
+
+// Preguntas y respuestas
 const preguntas = [
     {
         pregunta: "¿Cuál es la capital de Francia?",
@@ -10,24 +26,19 @@ const preguntas = [
         opciones: ["Pablo Neruda", "Jorge Luis Borges", "Gabriel García Márquez", "Mario Vargas Llosa"],
         respuesta: "Gabriel García Márquez"
     },
-    // Añadir más preguntas aquí
 ];
 
-let puntaje = 0;
-let tiempoRestante = 60;
-let preguntaActual = 0;
-let intervalo;
-let ranking = [];
-
-const preguntaElemento = document.getElementById("question");
-const opcionesElemento = document.getElementById("options");
-const puntajeElemento = document.getElementById("score");
-const timerElemento = document.getElementById("timer");
-const rankingElemento = document.getElementById("ranking-list");
-const startBtn = document.getElementById("start-btn");
+// Inicializar Firebase Database
+const database = getDatabase();
 
 // Función para iniciar el juego
 function iniciarJuego() {
+    nombreJugador = prompt("Por favor, ingresa tu nombre para comenzar:");
+    if (!nombreJugador) {
+        alert("Debes ingresar un nombre para jugar.");
+        return;
+    }
+
     puntaje = 0;
     tiempoRestante = 60;
     preguntaActual = 0;
@@ -75,28 +86,40 @@ function actualizarTiempo() {
     }
 }
 
+// Finalizar el juego y mostrar ranking
+// Finalizar el juego y mostrar ranking
+function finalizarJuego() {
+    clearInterval(intervalo);
+    guardarRanking(nombreJugador, puntaje);  // Guardar el puntaje en Firebase
+    cargarRanking();  // Mostrar el ranking actualizado
+
+    // Mostrar un mensaje final y el ranking
+    alert("¡Juego terminado! Revisa el ranking para ver tu posición.");
+    startBtn.style.display = 'block';  // Mostrar botón de inicio
+}
+
+
 // Guardar puntaje en Firebase
 function guardarRanking(nombreJugador, puntaje) {
     const nuevoJugador = {
         nombre: nombreJugador,
         puntaje: puntaje
     };
-    // Agregar a Firebase
-    const nuevoJugadorKey = database.ref().child('ranking').push().key;
-    database.ref('ranking/' + nuevoJugadorKey).set(nuevoJugador);
+    const rankingRef = ref(database, 'ranking');
+    push(rankingRef, nuevoJugador);  // Agregar puntaje a Firebase
 }
 
 // Cargar el ranking desde Firebase y mostrarlo
 function cargarRanking() {
-    database.ref('ranking').orderByChild('puntaje').limitToLast(10).on('value', function(snapshot) {
-        rankingElemento.innerHTML = '';
+    const rankingRef = ref(database, 'ranking');
+    onValue(rankingRef, (snapshot) => {
+        rankingElemento.innerHTML = '';  // Limpiar la lista antes de actualizarla
         const jugadores = [];
-        snapshot.forEach(function(childSnapshot) {
+        snapshot.forEach((childSnapshot) => {
             const jugador = childSnapshot.val();
             jugadores.push(jugador);
         });
-        // Mostrar en orden descendente
-        jugadores.reverse();
+        jugadores.sort((a, b) => b.puntaje - a.puntaje);  // Ordenar por puntaje de mayor a menor
         jugadores.forEach(jugador => {
             const li = document.createElement('li');
             li.textContent = `${jugador.nombre} - ${jugador.puntaje} puntos`;
@@ -105,28 +128,8 @@ function cargarRanking() {
     });
 }
 
-// Finalizar el juego y registrar al jugador
-function finalizarJuego() {
-    clearInterval(intervalo);
-    const nombreJugador = prompt("Juego terminado. Ingresa tu nombre:");
-    guardarRanking(nombreJugador, puntaje);
-    cargarRanking(); // Actualizar el ranking una vez se registre el nuevo puntaje
-    startBtn.style.display = 'block';  // Mostrar botón de inicio
-}
-
 // Cargar el ranking al inicio
 window.onload = cargarRanking;
 
-
-// Mostrar el ranking en la lista
-function mostrarRanking() {
-    ranking.sort((a, b) => b.puntaje - a.puntaje);  // Ordenar por puntaje
-    rankingElemento.innerHTML = '';
-    ranking.forEach(jugador => {
-        const li = document.createElement('li');
-        li.textContent = `${jugador.nombre} - ${jugador.puntaje} puntos`;
-        rankingElemento.appendChild(li);
-    });
-}
-
+// Agregar el evento al botón de iniciar juego
 startBtn.addEventListener('click', iniciarJuego);
