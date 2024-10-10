@@ -13,11 +13,11 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 200%; /* El doble del ancho para que las dos imágenes se vean */
+    width: 200%;
     height: 100%;
-    display: flex; /* Coloca las dos imágenes en fila */
+    display: flex;
     z-index: -1;
-    animation: moveBackground 30s linear infinite; /* Animación continua */
+    animation: moveBackground 30s linear infinite;
 }
 
 .background {
@@ -38,16 +38,15 @@ body {
 }
 
 .container {
-    background-size: contain;
-    max-width: 400px;
-    max-height: 80vh; /* Limita la altura para que se active la barra de desplazamiento */
-    overflow-y: auto; /* Muestra la barra de desplazamiento solo si es necesario */
-    border: 1px solid #ccc; /* Solo para visualizar el contenedor */
-    padding: 20px;
-    margin: auto;
-    background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco con 80% de opacidad */
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        max-width: 600px;
+        max-height: 80vh; /* Limita la altura para que se active la barra de desplazamiento */
+        overflow-y: auto; /* Muestra la barra de desplazamiento solo si es necesario */
+        border: 1px solid rgba(0, 0, 0, 0.1); /* Borde suave */
+        padding: 20px;
+        margin: auto;
+        background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco con 80% de opacidad */
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 h1 {
@@ -124,17 +123,30 @@ button#start-btn {
 }
 
 /* Media query para pantallas móviles (max-width: 600px) */
-@media (max-width: 400px) {
+@media (max-width: 768px) {
+    .background-wrapper {
+        width: 300%; /* Ajusta el ancho para dispositivos móviles */
+        height: 100%;
+        background-size: cover; /* Ajusta el tamaño de la imagen para que cubra todo el área */
+        animation-duration: 20s; 
+    }
+    .background {
+        width: 33.33%; /* Ajusta el ancho de cada imagen para que se repitan bien en móviles */
+        height: 100%;
+        background-size: cover; /* Asegura que la imagen siempre cubra el fondo */
+    }
     body {
         padding: 10px; /* Reduce el padding para ajustarse a pantallas pequeñas */
     }
-
-    .container {
-        max-width: 100%; /* El contenedor ocupa todo el ancho */
-        max-height: none; /* Permite que crezca más en altura */
-        padding: 15px; /* Ajusta el padding */
-        font-size: 14px; /* Reduce el tamaño de la fuente */
-    }
+        .container {
+            width: 90%; /* Ocupa la mayor parte del ancho de la pantalla */
+            max-width: 100%; /* Asegura que no haya límite de ancho en móviles */
+            padding: 15px; /* Ajusta el padding para pantallas pequeñas */
+            background-color: rgba(255, 255, 255, 0.8); /* Conserva la transparencia */
+        }
+    
+    
+    
 
     h1 {
         font-size: 24px; /* Ajusta el tamaño del encabezado */
