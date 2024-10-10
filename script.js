@@ -44,6 +44,11 @@ const preguntas = [
         respuesta: "Un chófer y dos ayudantes"
     },
     {
+        pregunta: "Los años que dieron inicio a la actividad fueron en los años de...",
+        opciones: ["Diciembre de 1991 ", "Septiembre de 1991", "Octubre de 1991"],
+        respuesta: "Septiembre de 1991"
+    },
+    {
         pregunta: "Los trabajadores deben encargarse de cargar el camión con los productos",
         opciones: ["Si, deben llegar antes de su jornada para cargar los productos ", "No, los productos ya están cargados en el camión pata cuando llegan", "Si, cargar los productos es parte de su jornada " , "¿Que productos?"],
         respuesta: "No, los productos ya están cargados en el camión pata cuando llegan"
@@ -54,9 +59,49 @@ const preguntas = [
         respuesta: "No, es una ayuda opcional"
     },
     {
-        pregunta: "Los trabajadores deben encargarse de cargar el camión con los productos",
-        opciones: ["No, es una ayuda opcional", "Si, es obligatoria"],
-        respuesta: "No, es una ayuda opcional"
+        pregunta: "La descarga puede ser:",
+        opciones: ["Manual ", "Semimecanizada ","Mecanizada ","Todas las anteriores"],
+        respuesta: "Todas las anteriores"
+    },
+    {
+        pregunta: "¿Cuándo es recomendable pedir ayuda al levantar una carga?",
+        opciones: ["Al superar los 10kg", "Al superar los 50kg ","Al superar los 25kg"],
+        respuesta: "Al superar los 25kg"
+    },
+    {
+        pregunta: "La resolución N° 3345/15 establece que...",
+        opciones: ["Los limites mínimos de para tareas de traslado, empuje o tracción de objetos pesados","Los límites máximos para tareas de traslado, empuje o tracción de objetos pesados"],
+        respuesta: "Los límites máximos para tareas de traslado, empuje o tracción de objetos pesados"
+    },
+    {
+        pregunta: "¿Que riesgo es más predominante en este sector?",
+        opciones: ["Atropellamientos y choques", "Cortes","Esfuerzo o Fuerza física","Todas"],
+        respuesta: "Todas"
+    },
+    {
+        pregunta: "¿Según la Trilogía de La Seguridad Vial cuáles son los factores que influencian en el circuito?",
+        opciones: ["Factor Humano", "Factor Vehicular"," Factor Ambiental","Todas"],
+        respuesta: "Todas"
+    },
+    {
+        pregunta: "¿En este sector se utiliza la La Ley de tránsito Nº 24.449??",
+        opciones: ["Si","No"],
+        respuesta: "Si"
+    },
+    {
+        pregunta: "Las entregas de los pedidos aumentan en qué época de año",
+        opciones: ["Invierno", "Otoño ","Verano","Primavera"],
+        respuesta: "Verano"
+    },
+    {
+        pregunta: "¿Cuáles de los siguientes elementos sirven para el traslado de carga?",
+        opciones: ["Montacargas", "Seguetas ","Mazo","Zorras"],
+        respuesta: "Montacargas"
+    },
+    {
+        pregunta: "¿Cuál bebida es mejor para un tere?",
+        opciones: ["Manaos Guarana", "Tubito Uva","Fernet Cola","Coca Cola"],
+        respuesta: "Manaos Guarana"
     },
 ];
 
