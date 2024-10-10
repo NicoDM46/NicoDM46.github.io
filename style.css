@@ -51,7 +51,7 @@ body {
 .imagen-bajo-texto {
     display: block; /* Hace que la imagen sea un bloque */
     margin: 20px auto; /* Centra la imagen horizontalmente */
-    max-width: 25%; /* Se adapta al tamaño de la pantalla */
+    max-width: 20%; /* Se adapta al tamaño de la pantalla */
     height: auto; /* Mantiene la proporción de la imagen */
 }
 
@@ -139,6 +139,12 @@ button#start-btn {
         .background {
             background-size: cover; /* Mantiene la imagen cubriendo todo el área */
             background-position: center top; /* Ajusta la posición para móviles */
+        }
+        .imagen-bajo-texto {
+            display: block; /* Hace que la imagen sea un bloque */
+            margin: 20px auto; /* Centra la imagen horizontalmente */
+            max-width: 20%; /* Se adapta al tamaño de la pantalla */
+            height: auto; /* Mantiene la proporción de la imagen */
         }
     }
     body {
