@@ -26,7 +26,7 @@ const rankingElemento = document.getElementById("ranking-list");
 const startBtn = document.getElementById("start-btn");
 
 let puntaje = 0;
-let tiempoRestante = 60;
+let tiempoRestante = 360;
 let preguntaActual = 0;
 let intervalo;
 let nombreJugador = '';
@@ -115,7 +115,7 @@ function iniciarJuego() {
     }
 
     puntaje = 0;
-    tiempoRestante = 120;
+    tiempoRestante = 360;
     preguntaActual = 0;
     puntajeElemento.textContent = puntaje;
     timerElemento.textContent = tiempoRestante;
@@ -174,7 +174,7 @@ function guardarRanking(nombreJugador, puntaje, tiempo) {
     const nuevoJugador = {
         nombre: nombreJugador,
         puntaje: puntaje,
-        tiempo: 120 - tiempo // Guardar el tiempo utilizado
+        tiempo: 360 - tiempo // Guardar el tiempo utilizado
     };
     const rankingRef = ref(database, 'ranking');
     push(rankingRef, nuevoJugador)  // Agregar puntaje a Firebase
