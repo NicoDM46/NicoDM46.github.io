@@ -1,6 +1,6 @@
 /* Estilo general para pantallas más grandes */
 body {
-    height: 90%; /* Asegura que ocupe todo el alto de la pantalla */
+    height: 95%; /* Asegura que ocupe todo el alto de la pantalla */
     font-family: Arial, sans-serif;
     background-color: #ffffff;
     margin: 0;
@@ -151,7 +151,7 @@ button#start-btn {
         padding: 10px; /* Reduce el padding para ajustarse a pantallas pequeñas */
     }
         .container {
-            width: 90%; /* Ocupa la mayor parte del ancho de la pantalla */
+            width: 95%; /* Ocupa la mayor parte del ancho de la pantalla */
             max-width: 100%; /* Asegura que no haya límite de ancho en móviles */
             padding: 15px; /* Ajusta el padding para pantallas pequeñas */
             background-color: rgba(255, 255, 255, 0.8); /* Conserva la transparencia */
