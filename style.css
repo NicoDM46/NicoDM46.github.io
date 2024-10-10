@@ -1,11 +1,13 @@
 body {
+    height: 100%; /* Asegura que ocupe todo el alto de la pantalla */
     font-family: Arial, sans-serif;
     background-color: #690551;
     margin: 0;
     padding: 20px;
     text-align: center;
-    overflow: hidden;
+    overflow-y: auto; /* Muestra la barra de desplazamiento cuando sea necesario */
 }
+
 .background-wrapper {
     position: fixed;
     top: 0;
@@ -36,8 +38,11 @@ body {
 
 .container {
     max-width: 600px;
-    margin: auto;
+    max-height: 80vh; /* Limita la altura para que se active la barra de desplazamiento */
+    overflow-y: auto; /* Muestra la barra de desplazamiento solo si es necesario */
+    border: 1px solid #ccc; /* Solo para visualizar el contenedor */
     padding: 20px;
+    margin: auto;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
@@ -84,6 +89,7 @@ button#start-btn {
     border-radius: 5px;
     cursor: pointer;
 }
+
 #ranking {
     margin-top: 20px;
     border: 2px solid #333;
