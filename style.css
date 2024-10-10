@@ -37,6 +37,7 @@ body {
 }
 
 .container {
+    background-size: contain;
     max-width: 600px;
     max-height: 80vh; /* Limita la altura para que se active la barra de desplazamiento */
     overflow-y: auto; /* Muestra la barra de desplazamiento solo si es necesario */
@@ -119,4 +120,37 @@ button#start-btn {
 
 #ranking-list li:last-child {
     border-bottom: none; /* Eliminar borde en el último elemento */
+}
+@media (max-width: 600px) {
+    body {
+        padding: 10px; /* Reduce el padding para ajustarse mejor a pantallas pequeñas */
+    }
+
+    .container {
+        max-width: 100%; /* Ocupa todo el ancho de la pantalla */
+        padding: 10px; /* Reduce el padding interno */
+        font-size: 14px; /* Ajusta el tamaño de fuente para que se vea bien en pantallas pequeñas */
+    }
+
+    h1 {
+        font-size: 24px; /* Ajusta el tamaño del encabezado */
+    }
+
+    #options button {
+        padding: 8px; /* Reduce el padding de los botones */
+    }
+
+    #ranking {
+        margin-top: 10px;
+        padding: 5px;
+    }
+
+    #ranking-list li {
+        font-size: 14px; /* Reduce el tamaño de fuente en la lista */
+        padding: 5px;
+    }
+
+    button#start-btn {
+        padding: 8px 16px; /* Ajusta el tamaño del botón */
+    }
 }
