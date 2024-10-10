@@ -2,7 +2,7 @@
 body {
     height: 90%; /* Asegura que ocupe todo el alto de la pantalla */
     font-family: Arial, sans-serif;
-    background-color: #690551;
+    background-color: #ffffff;
     margin: 0;
     padding: 20px;
     text-align: center;
@@ -47,6 +47,12 @@ body {
         background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco con 80% de opacidad */
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.imagen-bajo-texto {
+    display: block; /* Hace que la imagen sea un bloque */
+    margin: 20px auto; /* Centra la imagen horizontalmente */
+    max-width: 25%; /* Se adapta al tamaño de la pantalla */
+    height: auto; /* Mantiene la proporción de la imagen */
 }
 
 h1 {
@@ -124,16 +130,16 @@ button#start-btn {
 
 /* Media query para pantallas móviles (max-width: 600px) */
 @media (max-width: 768px) {
-    .background-wrapper {
-        width: 300%; /* Ajusta el ancho para dispositivos móviles */
-        height: 100%;
-        background-size: cover; /* Ajusta el tamaño de la imagen para que cubra todo el área */
-        animation-duration: 20s; 
-    }
-    .background {
-        width: 33.33%; /* Ajusta el ancho de cada imagen para que se repitan bien en móviles */
-        height: 100%;
-        background-size: cover; /* Asegura que la imagen siempre cubra el fondo */
+    @media (max-width: 768px) {
+        .background-wrapper {
+            width: 100%;
+            height: 100vh; /* Asegura que ocupe el alto completo de la vista */
+        }
+    
+        .background {
+            background-size: cover; /* Mantiene la imagen cubriendo todo el área */
+            background-position: center top; /* Ajusta la posición para móviles */
+        }
     }
     body {
         padding: 10px; /* Reduce el padding para ajustarse a pantallas pequeñas */
