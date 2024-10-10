@@ -1,9 +1,37 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #690551;
     margin: 0;
     padding: 20px;
     text-align: center;
+    overflow: hidden;
+}
+.background-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200%; /* El doble del ancho para que las dos imágenes se vean */
+    height: 100%;
+    display: flex; /* Coloca las dos imágenes en fila */
+    z-index: -1;
+    animation: moveBackground 30s linear infinite; /* Animación continua */
+}
+
+.background {
+    width: 50%; /* La mitad del contenedor para que haya dos imágenes en fila */
+    height: 100%;
+    background-image: url(images/Fondo.jpg); /* Ruta de la imagen */
+    background-size: cover;
+    background-repeat: no-repeat; /* No repetir dentro de cada contenedor */
+}
+
+@keyframes moveBackground {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
 }
 
 .container {

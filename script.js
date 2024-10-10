@@ -34,14 +34,29 @@ let nombreJugador = '';
 // Preguntas y respuestas
 const preguntas = [
     {
-        pregunta: "¿Cuál es la capital de Francia?",
-        opciones: ["Madrid", "París", "Londres", "Roma"],
-        respuesta: "París"
+        pregunta: "¿Cuando se asigna la hoja de ruta? ",
+        opciones: ["Al inicio de cada turno", "En el medio de la jornada", "Cada que el camión vuelve al depósito"],
+        respuesta: "Al inicio de cada turno"
     },
     {
-        pregunta: "¿Quién escribió 'Cien años de soledad'?",
-        opciones: ["Pablo Neruda", "Jorge Luis Borges", "Gabriel García Márquez", "Mario Vargas Llosa"],
-        respuesta: "Gabriel García Márquez"
+        pregunta: "¿Hasta cuantos trabajadores se recomienda que sean asignados a cada camión?",
+        opciones: ["Solamente un chófer", "Un chófer y un ayudante", "Un chófer y dos ayudantes"],
+        respuesta: "Un chófer y dos ayudantes"
+    },
+    {
+        pregunta: "Los trabajadores deben encargarse de cargar el camión con los productos",
+        opciones: ["Si, deben llegar antes de su jornada para cargar los productos ", "No, los productos ya están cargados en el camión pata cuando llegan", "Si, cargar los productos es parte de su jornada " , "¿Que productos?"],
+        respuesta: "No, los productos ya están cargados en el camión pata cuando llegan"
+    },
+    {
+        pregunta: "¿La faja lumbar es obligatoria para los trabajadores?",
+        opciones: ["No, es una ayuda opcional", "Si, es obligatoria"],
+        respuesta: "No, es una ayuda opcional"
+    },
+    {
+        pregunta: "Los trabajadores deben encargarse de cargar el camión con los productos",
+        opciones: ["No, es una ayuda opcional", "Si, es obligatoria"],
+        respuesta: "No, es una ayuda opcional"
     },
 ];
 
@@ -55,7 +70,7 @@ function iniciarJuego() {
     }
 
     puntaje = 0;
-    tiempoRestante = 60;
+    tiempoRestante = 120;
     preguntaActual = 0;
     puntajeElemento.textContent = puntaje;
     timerElemento.textContent = tiempoRestante;
@@ -114,7 +129,7 @@ function guardarRanking(nombreJugador, puntaje, tiempo) {
     const nuevoJugador = {
         nombre: nombreJugador,
         puntaje: puntaje,
-        tiempo: 60 - tiempo // Guardar el tiempo utilizado
+        tiempo: 120 - tiempo // Guardar el tiempo utilizado
     };
     const rankingRef = ref(database, 'ranking');
     push(rankingRef, nuevoJugador)  // Agregar puntaje a Firebase
