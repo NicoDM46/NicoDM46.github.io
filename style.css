@@ -1,5 +1,6 @@
+/* Estilo general para pantallas más grandes */
 body {
-    height: 100%; /* Asegura que ocupe todo el alto de la pantalla */
+    height: 90%; /* Asegura que ocupe todo el alto de la pantalla */
     font-family: Arial, sans-serif;
     background-color: #690551;
     margin: 0;
@@ -38,7 +39,7 @@ body {
 
 .container {
     background-size: contain;
-    max-width: 600px;
+    max-width: 400px;
     max-height: 80vh; /* Limita la altura para que se active la barra de desplazamiento */
     overflow-y: auto; /* Muestra la barra de desplazamiento solo si es necesario */
     border: 1px solid #ccc; /* Solo para visualizar el contenedor */
@@ -121,15 +122,18 @@ button#start-btn {
 #ranking-list li:last-child {
     border-bottom: none; /* Eliminar borde en el último elemento */
 }
-@media (max-width: 600px) {
+
+/* Media query para pantallas móviles (max-width: 600px) */
+@media (max-width: 400px) {
     body {
-        padding: 10px; /* Reduce el padding para ajustarse mejor a pantallas pequeñas */
+        padding: 10px; /* Reduce el padding para ajustarse a pantallas pequeñas */
     }
 
     .container {
-        max-width: 100%; /* Ocupa todo el ancho de la pantalla */
-        padding: 10px; /* Reduce el padding interno */
-        font-size: 14px; /* Ajusta el tamaño de fuente para que se vea bien en pantallas pequeñas */
+        max-width: 100%; /* El contenedor ocupa todo el ancho */
+        max-height: none; /* Permite que crezca más en altura */
+        padding: 15px; /* Ajusta el padding */
+        font-size: 14px; /* Reduce el tamaño de la fuente */
     }
 
     h1 {
@@ -137,20 +141,16 @@ button#start-btn {
     }
 
     #options button {
-        padding: 8px; /* Reduce el padding de los botones */
-    }
-
-    #ranking {
-        margin-top: 10px;
-        padding: 5px;
-    }
-
-    #ranking-list li {
-        font-size: 14px; /* Reduce el tamaño de fuente en la lista */
-        padding: 5px;
+        padding: 8px; /* Ajusta el padding del botón */
+        font-size: 14px; /* Ajusta el tamaño de la fuente */
     }
 
     button#start-btn {
         padding: 8px 16px; /* Ajusta el tamaño del botón */
+    }
+
+    #ranking-list li {
+        font-size: 12px; /* Ajusta el tamaño de la fuente en la lista */
+        padding: 5px;
     }
 }
