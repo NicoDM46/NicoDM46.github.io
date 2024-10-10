@@ -38,21 +38,21 @@ body {
 }
 
 .container {
-    max-width: 600px;
-    max-height: 80vh; /* Limita la altura para que se active la barra de desplazamiento */
-    overflow-y: auto; /* Muestra la barra de desplazamiento solo si es necesario */
-    border: 1px solid rgba(0, 0, 0, 0.1); /* Borde suave */
-    padding: 20px;
-    margin: auto;
-    background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco con 80% de opacidad */
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        max-width: 600px;
+        max-height: 80vh; /* Limita la altura para que se active la barra de desplazamiento */
+        overflow-y: auto; /* Muestra la barra de desplazamiento solo si es necesario */
+        border: 1px solid rgba(0, 0, 0, 0.1); /* Borde suave */
+        padding: 20px;
+        margin: auto;
+        background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco con 80% de opacidad */
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 .imagen-bajo-texto {
     display: block; /* Hace que la imagen sea un bloque */
     margin: 20px auto; /* Centra la imagen horizontalmente */
-    max-width: 100%; /* Se adapta al tamaño de la pantalla */
+    max-width: 20%; /* Se adapta al tamaño de la pantalla */
     height: auto; /* Mantiene la proporción de la imagen */
 }
 
@@ -60,51 +60,71 @@ h1 {
     color: #333;
 }
 
-/* Resto de estilos y botones se mantienen igual */
+#quiz-container {
+    margin-top: 20px;
+}
 
-/* Media query para pantallas móviles (max-width: 768px) */
-@media (max-width: 768px) {
-    .background-wrapper {
-        width: 100%;
-        height: 100vh; /* Asegura que ocupe el alto completo de la vista */
-    }
+#options button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
-    .background {
-        background-size: cover; /* Mantiene la imagen cubriendo todo el área */
-        background-position: center top; /* Ajusta la posición para móviles */
-    }
+#options button:hover {
+    background-color: #2980b9;
+}
 
-    .imagen-bajo-texto {
-        max-width: 90%; /* Se adapta mejor al ancho del dispositivo móvil */
-        height: auto; /* Mantiene la proporción de la imagen */
-    }
+#score-board, #ranking {
+    margin-top: 20px;
+    text-align: left;
+}
 
-    body {
-        padding: 10px; /* Reduce el padding para ajustarse a pantallas pequeñas */
-    }
+#timer {
+    font-weight: bold;
+}
 
-    .container {
-        width: 100%; /* Ocupa todo el ancho de la pantalla */
-        max-width: 100%; /* Sin límite de ancho en móviles */
-        padding: 15px; /* Ajusta el padding para pantallas pequeñas */
-        background-color: rgba(255, 255, 255, 0.8); /* Conserva la transparencia */
-    }
+button#start-btn {
+    padding: 10px 20px;
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
-    h1 {
-        font-size: 24px; /* Ajusta el tamaño del encabezado */
-    }
+#ranking {
+    margin-top: 20px;
+    border: 2px solid #333;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px; /* Esquinas redondeadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para darle profundidad */
+}
 
-    #options button {
-        padding: 8px; /* Ajusta el padding del botón */
-        font-size: 14px; /* Ajusta el tamaño de la fuente */
-    }
+#ranking h2 {
+    text-align: center;
+    color: #333;
+}
 
-    button#start-btn {
-        padding: 8px 16px; /* Ajusta el tamaño del botón */
-    }
+#ranking-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
 
-    #ranking-list li {
-        font-size: 12px; /* Ajusta el tamaño de la fuente en la lista */
-        padding: 5px;
-    }
+#ranking-list li {
+    padding: 8px;
+    border-bottom: 1px solid #ccc; /* Línea divisoria entre jugadores */
+    display: flex;
+    justify-content: space-between; /* Espacio entre el nombre y puntaje */
+}
+
+#ranking-list li:last-child {
+    border-bottom: none; /* Eliminar borde en el último elemento */
 }
