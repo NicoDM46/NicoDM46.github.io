@@ -56,3 +56,33 @@ button#start-btn {
     border-radius: 5px;
     cursor: pointer;
 }
+#ranking {
+    margin-top: 20px;
+    border: 2px solid #333;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px; /* Esquinas redondeadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para darle profundidad */
+}
+
+#ranking h2 {
+    text-align: center;
+    color: #333;
+}
+
+#ranking-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#ranking-list li {
+    padding: 8px;
+    border-bottom: 1px solid #ccc; /* Línea divisoria entre jugadores */
+    display: flex;
+    justify-content: space-between; /* Espacio entre el nombre y puntaje */
+}
+
+#ranking-list li:last-child {
+    border-bottom: none; /* Eliminar borde en el último elemento */
+}

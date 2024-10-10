@@ -1,18 +1,35 @@
+// Importar funciones necesarias de Firebase
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
 import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-database.js";
 
-let puntaje = 0;
-let tiempoRestante = 60;
-let preguntaActual = 0;
-let intervalo;
-let ranking = [];
-let nombreJugador = ''; // Guardar el nombre del jugador aquí
+// Configuración de Firebase
+const firebaseConfig = {
+    apiKey: "AIzaSyCTzY_bR-zF0-VSw90v0zYr7jganu9gCGI",
+    authDomain: "victoria-juego.firebaseapp.com",
+    databaseURL: "https://victoria-juego-default-rtdb.firebaseio.com",
+    projectId: "victoria-juego",
+    storageBucket: "victoria-juego.appspot.com",
+    messagingSenderId: "98502758232",
+    appId: "1:98502758232:web:622ac55c37465a38839f2d"
+  };
 
+// Inicializar Firebase y la base de datos
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+
+// Variables del DOM
 const preguntaElemento = document.getElementById("question");
 const opcionesElemento = document.getElementById("options");
 const puntajeElemento = document.getElementById("score");
 const timerElemento = document.getElementById("timer");
 const rankingElemento = document.getElementById("ranking-list");
 const startBtn = document.getElementById("start-btn");
+
+let puntaje = 0;
+let tiempoRestante = 60;
+let preguntaActual = 0;
+let intervalo;
+let nombreJugador = '';
 
 // Preguntas y respuestas
 const preguntas = [
@@ -28,11 +45,9 @@ const preguntas = [
     },
 ];
 
-// Inicializar Firebase Database
-const database = getDatabase();
-
 // Función para iniciar el juego
 function iniciarJuego() {
+    console.log("El juego ha comenzado");
     nombreJugador = prompt("Por favor, ingresa tu nombre para comenzar:");
     if (!nombreJugador) {
         alert("Debes ingresar un nombre para jugar.");
@@ -44,9 +59,9 @@ function iniciarJuego() {
     preguntaActual = 0;
     puntajeElemento.textContent = puntaje;
     timerElemento.textContent = tiempoRestante;
-    startBtn.style.display = 'none';  // Esconder botón de inicio
+    startBtn.style.display = 'none';  // Ocultar botón de inicio
     siguientePregunta();
-    intervalo = setInterval(actualizarTiempo, 1000);  // Comienza el temporizador
+    intervalo = setInterval(actualizarTiempo, 1000);  // Iniciar el temporizador
 }
 
 // Mostrar la siguiente pregunta
@@ -86,28 +101,31 @@ function actualizarTiempo() {
     }
 }
 
-// Finalizar el juego y mostrar ranking
-// Finalizar el juego y mostrar ranking
+// Finalizar el juego y mostrar el ranking
 function finalizarJuego() {
     clearInterval(intervalo);
-    guardarRanking(nombreJugador, puntaje);  // Guardar el puntaje en Firebase
-    cargarRanking();  // Mostrar el ranking actualizado
-
-    // Mostrar un mensaje final y el ranking
-    alert("¡Juego terminado! Revisa el ranking para ver tu posición.");
+    guardarRanking(nombreJugador, puntaje, tiempoRestante);  // Guardar puntaje y tiempo en Firebase
+    cargarRanking();  // Mostrar ranking actualizado
     startBtn.style.display = 'block';  // Mostrar botón de inicio
 }
 
-
-// Guardar puntaje en Firebase
-function guardarRanking(nombreJugador, puntaje) {
+// Guardar puntaje y tiempo en Firebase
+function guardarRanking(nombreJugador, puntaje, tiempo) {
     const nuevoJugador = {
         nombre: nombreJugador,
-        puntaje: puntaje
+        puntaje: puntaje,
+        tiempo: 60 - tiempo // Guardar el tiempo utilizado
     };
     const rankingRef = ref(database, 'ranking');
-    push(rankingRef, nuevoJugador);  // Agregar puntaje a Firebase
+    push(rankingRef, nuevoJugador)  // Agregar puntaje a Firebase
+        .then(() => {
+            console.log("Datos guardados en Firebase:", nuevoJugador);
+        })
+        .catch((error) => {
+            console.error("Error al guardar datos en Firebase:", error);
+        });
 }
+
 
 // Cargar el ranking desde Firebase y mostrarlo
 function cargarRanking() {
@@ -119,17 +137,26 @@ function cargarRanking() {
             const jugador = childSnapshot.val();
             jugadores.push(jugador);
         });
-        jugadores.sort((a, b) => b.puntaje - a.puntaje);  // Ordenar por puntaje de mayor a menor
+        // Ordenar por puntaje de mayor a menor
+        jugadores.sort((a, b) => b.puntaje - a.puntaje);
+
+        // Mostrar la lista de jugadores con el mayor puntaje primero
         jugadores.forEach(jugador => {
             const li = document.createElement('li');
-            li.textContent = `${jugador.nombre} - ${jugador.puntaje} puntos`;
+            li.textContent = `${jugador.nombre} - ${jugador.puntaje} puntos - ${jugador.tiempo} segundos`;
             rankingElemento.appendChild(li);
         });
     });
 }
 
-// Cargar el ranking al inicio
-window.onload = cargarRanking;
+// Asignar el evento al botón de iniciar juego
+if (startBtn) {
+    startBtn.addEventListener('click', iniciarJuego);
+} else {
+    console.error('El botón de iniciar no se encontró en el DOM');
+}
 
-// Agregar el evento al botón de iniciar juego
-startBtn.addEventListener('click', iniciarJuego);
+// Cargar el ranking automáticamente al inicio
+document.addEventListener("DOMContentLoaded", function() {
+    cargarRanking();
+});
